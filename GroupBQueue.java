@@ -49,6 +49,42 @@ class Queue1
             }
         }
     }
+    public void cancelevent(String eventName)
+    {
+        if(count==0)
+        {
+            System.out.println("There is no event to cancel");
+            return;
+        }
+        boolean found=false;
+        String[]temp=new String[maxsize];
+        int temprear=-1;
+        for(int i=0;i<count;i++)
+        {
+            int index=(front+i)%maxsize;
+            if(a[index].equalsIgnoreCase(eventName))
+            {
+                found=true;
+            }
+            else {
+                temprear++;
+                temp[temprear]=a[index];
+            }
+        }
+        if(found)
+        {
+            count=temprear+1;
+            front=0;
+            rear=count-1;
+            for(int i=0;i<count;i++)
+            {
+                a[i]=temp[i];
+            }
+        }
+        else {
+            System.out.println("the event"+eventName+"is not found in the queue");
+        }
+    }
 
 }
 
@@ -60,13 +96,10 @@ public class GroupBQueue {
         q1.enqueue("Art");
         q1.enqueue("Mimickry");
         q1.enqueue("Reading");
-        q1.display();
-        q1.dequeue();
         q1.dequeue();
         q1.dequeue();
         q1.display();
-        q1.dequeue();
-        q1.dequeue();
+        q1.cancelevent("Art");
         q1.display();
     }
 
